@@ -1,0 +1,98 @@
+[
+  {
+    "question": "Définition du Ciment ?",
+    "answer": "C’est une colle"
+  },
+  {
+    "question": "En quoi consiste l’hydratation du ciment ?",
+    "answer": "C’est une réaction chimique entre le clinker, l’eau et le sulfate de calcium"
+  },
+  {
+    "question": "Qu’appelle-t-on Blaine ?",
+    "answer": "La finesse du ciment (300 à 421 m2/kg pour le ciment portland normale)"
+  },
+  {
+    "question": "À quoi sert le broyage du clinker ?",
+    "answer": "Augmenter la surface de contact avec l’eau et réduire la taille des particules pour s’assurer que tout sera consommé"
+  },
+  {
+    "question": "Que se passe-t-il si on n’ajoute pas de sulfate dans la composition du ciment ?",
+    "answer": "Prise immédiate du mortier ou du mélange en présence d’eau (Flash Set ! – le béton sera impossible de le sortir de la bétonnière)"
+  },
+  {
+    "question": "Qu’est-ce qu’une fausse prise ?",
+    "answer": "La formation de plâtre en raison d’excès de sulfate de calcium rapidement soluble (peut être cassée en remixant le mélange)"
+  },
+  {
+    "question": "Quelle est la signification de B, M, S, V, « 42.5 » et N dans « CEM II / B - M (S-V) 42.5N » ?",
+    "answer": "CEM II : ciment composé portland / B : % de l’ajout de 21 à 35% (A de 6 à 20% et C de 36 à 65%) / M : ciment avec au moins 2 constituants principaux autre que clinker /S : laitier (GBFS) / V : cendres volantes / 42.5 : classe de résistance (résistance caractéristique minimale à 28 jours exprimée en Mpa)"
+  },
+  {
+    "question": "Donnez une composition type d’un m3 de béton ?",
+    "answer": "1900 kg d’agrégats ; 180 kg d’eau ; 300 kg de ciment"
+  },
+  {
+    "question": "Qu’est-ce que le temps de prise du ciment ?",
+    "answer": "C’est la période pendant laquelle la pâte de ciment perd sa mobilité (temps de prise initiale : fin de période d’ouvrabilité ; temps de prise finale : début du durcissement)"
+  },
+  {
+    "question": "Qu’est-ce que la chaleur d’hydratation du ciment ?",
+    "answer": "La chaleur libérée lorsque le ciment et l’eau réagissent"
+  },
+  {
+    "question": "Quelles sont les conditions d’applications les plus importantes ?",
+    "answer": "Résistance (1j ; 3j ; 28j) / temps de prise / résistance à l’attaque chimique / résistance à l’attaque physique / développement de la chaleur d’hydratation / couleur"
+  },
+  {
+    "question": "Quelles sont les exigences les plus courantes des utilisateurs finaux ?",
+    "answer": "Maniabilité – fluidité / adhésion – fin de vie / régularité de la qualité / respect des délais de livraison / service technique"
+  },
+  {
+    "question": "Définition de maçonnerie",
+    "answer": "type de construction composée d’éléments de maçonnerie (briques, blocs, …) posés avec du mortier, du coulis ou d’autres méthodes de jonction"
+  },
+  {
+    "question": "Définition de mortier",
+    "answer": "mélange constitué de matériaux cimentières, agrégats fins, d’eau et avec ou sans adjuvants"
+  },
+  {
+    "question": "Définition de ciment de maçonnerie",
+    "answer": "ciment hydraulique composé de ciment portland et matériaux plastifiants (calcaire, chaux hydratée ou hydraulique) ainsi que d’autres matériaux améliorant le temps de prise et la maniabilité, …"
+  },
+  {
+    "question": "Définition d'enduit",
+    "answer": "mélange de ciment, de chaux ou de gypse de sable et de l’eau, qui durcit en un solide lisse qui sert à enduire les murs et les plafonds"
+  },
+  {
+    "question": "Définition de chape",
+    "answer": "une surface finale lisse d’une substance telle que du mortier ou du béton, appliquée sur un sol"
+  },
+  {
+    "question": "Pourquoi les composants minéraux sont clés pour la durabilité ?",
+    "answer": "Les CM réagissent avec le portlandite (l’élément le plus fragile du ciment) pour former plus de C-S-H l’élément fondamental pour assurer la résistance. La pâte de ciment devient plus compacte avec moins de pores communicants"
+  },
+  {
+    "question": "Qu’est-ce qu’une réaction hydraulique ?",
+    "answer": "Réaction en présence d’eau (pas besoin de catalyseur). C’est pourquoi il ne faut pas stoker le ciment dans des endroits humides"
+  },
+  {
+    "question": "Quel est le rôle de l’eau dans l’état du béton frais ?",
+    "answer": "Il fournit la mobilité à la masse de béton frais"
+  },
+  {
+    "question": "Quel est le rôle de l’eau dans l’état du béton durci ?",
+    "answer": "Réagit avec le liant permettant ainsi au béton de faire prise et durcir"
+  },
+  {
+    "question": "Quel est le rôle des granulats dans le béton ?",
+    "answer": "Fournissent un remplissage relativement bon marché. Fournissent une stabilité volumétrique au béton (rétraction réduite, émission de chaleur réduite)"
+  },
+  {
+    "question": "Par quel test mesure-t-on la consistance d’un béton ? En quoi cela consiste ?",
+    "answer": "L’affaissement (slump) du béton se mesure avec le Cône d’Abrams (plus c’est élevé plus c’est fluide et moins consistant)"
+  },
+  {
+    "question": "Quels sont les facteurs qui influencent la résistance du béton ?",
+    "answer": "La résistance des constituants du béton ; le rapport E/C ; la porosité ; la consommation du ciment ; le type de ciment ; le type d’agrégats (taille et forme) ; l’âge du béton ; les conditions de cure"
+  }
+]

@@ -1,8 +1,7 @@
-// eslint-disable-next-line no-unused-vars
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import questionsData from "../data/questions.json";
-import { jaccardSimilarity } from "../utils/compare"; // Tes questions au format [{ question: "", answer: "" }]
+import { jaccardSimilarity } from "../utils/compare";
 
 function isAnswerCloseEnough(input, correct, threshold = 0.6) {
   return jaccardSimilarity(input, correct) >= threshold;
@@ -15,14 +14,18 @@ export default function Quiz() {
   const [feedback, setFeedback] = useState(null);
   const [incorrectQueue, setIncorrectQueue] = useState([]);
   const [completed, setCompleted] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
 
   useEffect(() => {
     const shuffled = [...questionsData].sort(() => Math.random() - 0.5);
     setQuestions(shuffled);
     setCurrent(shuffled[0]);
+    setTotalCount(shuffled.length);
+    setCurrentIndex(1);
   }, []);
 
-  function proceedToNext(questionsList, incorrectList) {
+  function proceedToNext(questionsList, incorrectList, isCorrect) {
     let next = null;
 
     if (questionsList.length > 0) {
@@ -37,6 +40,9 @@ export default function Quiz() {
       setCurrent(next);
       setAnswer("");
       setFeedback(null);
+      if (isCorrect) {
+        setCurrentIndex((prev) => prev + 1);
+      }
     } else {
       setCompleted(true);
     }
@@ -46,28 +52,26 @@ export default function Quiz() {
     e.preventDefault();
     if (!current) return;
 
-    const isCorrect = isAnswerCloseEnough(answer, current.answer);
+    const isCorrect =
+      current.type === "multiple"
+        ? answer === current.answer
+        : isAnswerCloseEnough(answer, current.answer);
+
     let newIncorrectQueue = [...incorrectQueue];
     let newQuestions = [...questions];
 
     if (isCorrect) {
       setFeedback({ type: "correct", text: "✅ Bonne réponse !" });
-
-      // Supprime de la file des incorrectes si présente
       newIncorrectQueue = newIncorrectQueue.filter(
         (q) => q.question !== current.question
       );
-
-      // Met à jour les files immédiatement
       newQuestions = newQuestions.filter(
         (q) => q.question !== current.question
       );
       setIncorrectQueue(newIncorrectQueue);
       setQuestions(newQuestions);
-
-      // Avancer automatiquement après 1,5 sec
       setTimeout(() => {
-        proceedToNext(newQuestions, newIncorrectQueue);
+        proceedToNext(newQuestions, newIncorrectQueue, isCorrect);
       }, 1500);
     } else {
       setFeedback({
@@ -75,17 +79,13 @@ export default function Quiz() {
         text: `❌ Mauvaise réponse. La bonne réponse était : ${current.answer}`,
       });
 
-      // Ajouter à la file si pas déjà dedans
       if (!newIncorrectQueue.some((q) => q.question === current.question)) {
         newIncorrectQueue.push(current);
       }
 
-      // Supprimer la question du tableau principal (elle sera réutilisée)
       newQuestions = newQuestions.filter(
         (q) => q.question !== current.question
       );
-
-      // Mise à jour des queues
       setIncorrectQueue(newIncorrectQueue);
       setQuestions(newQuestions);
     }
@@ -100,7 +100,9 @@ export default function Quiz() {
       setCompleted(false);
       setFeedback(null);
       setAnswer("");
+      setCurrentIndex(1);
     }
+
     return (
       <div className="max-w-xl mx-auto mt-10 p-6 text-center bg-green-50 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold text-green-700 mb-4">🎉 Bravo !</h2>
@@ -117,61 +119,107 @@ export default function Quiz() {
     );
   }
 
+  const answeredCount = totalCount - questions.length - incorrectQueue.length;
+  const progress = Math.min(answeredCount / totalCount, 1);
+
   return (
-    <motion.div
+    <motion.section
       key={current?.question}
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg space-y-6"
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="w-full min-h-screen bg-gray-100 flex items-center justify-center px-4 py-6"
     >
-      <h2 className="text-xl font-semibold text-gray-800">📝 Question :</h2>
+      <div className="w-full sm:max-w-xl bg-white rounded-xl shadow-lg p-4 sm:p-6 space-y-6">
+        {/* Compteur + Progression */}
+        <div className="space-y-2">
+          <div className="text-right text-sm text-gray-500">
+            Question {currentIndex} / {totalCount}
+          </div>
+          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-blue-600"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress * 100}%` }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            />
+          </div>
+        </div>
 
-      <div className="text-lg font-medium text-gray-900">
-        {current?.question}
-      </div>
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+          📝 Question :
+        </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Votre réponse..."
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          autoFocus
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-        >
-          Valider
-        </button>
-      </form>
+        <div className="text-base sm:text-lg font-medium text-gray-900">
+          {current?.question}
+        </div>
 
-      {feedback && (
-        <motion.div
-          key={feedback.text}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className={`p-4 rounded-xl font-medium space-y-4 transition ${
-            feedback.type === "correct"
-              ? "bg-green-100 text-green-800"
-              : "bg-red-100 text-red-800"
-          }`}
-        >
-          <p>{feedback.text}</p>
-
-          {feedback.type === "incorrect" && (
-            <button
-              onClick={() => proceedToNext(questions, incorrectQueue)}
-              className="mt-2 w-full bg-gray-800 text-white py-2 rounded-lg font-semibold hover:bg-gray-900 transition"
-            >
-              Continuer
-            </button>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {current?.type === "multiple" ? (
+            <div className="space-y-2">
+              {current?.choices.map((choice) => (
+                <label
+                  key={choice}
+                  className={`block border p-3 rounded-lg cursor-pointer ${
+                    answer === choice
+                      ? "bg-blue-100 border-blue-500"
+                      : "border-gray-300"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value={choice}
+                    checked={answer === choice}
+                    onChange={(e) => setAnswer(e.target.value)}
+                    className="hidden"
+                  />
+                  {choice}
+                </label>
+              ))}
+            </div>
+          ) : (
+            <textarea
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+              placeholder="Votre réponse..."
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              autoFocus
+            />
           )}
-        </motion.div>
-      )}
-    </motion.div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+          >
+            Valider
+          </button>
+        </form>
+
+        {feedback && (
+          <motion.div
+            key={feedback.text}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className={`p-4 rounded-xl font-medium space-y-4 transition ${
+              feedback.type === "correct"
+                ? "bg-green-100 text-green-800"
+                : "bg-red-100 text-red-800"
+            }`}
+          >
+            <p>{feedback.text}</p>
+
+            {feedback.type === "incorrect" && (
+              <button
+                onClick={() => proceedToNext(questions, incorrectQueue)}
+                className="w-full bg-gray-800 text-white py-2 rounded-lg font-semibold hover:bg-gray-900 transition"
+              >
+                Continuer
+              </button>
+            )}
+          </motion.div>
+        )}
+      </div>
+    </motion.section>
   );
 }

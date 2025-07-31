@@ -1,13 +1,203 @@
 [
   {
-    "question": "Quelle est la capitale de la France ?",
-    "answer": "Paris",
+    "question": "Définition du ciment ?",
+    "answer": "Colle",
     "type": "text"
   },
   {
-    "question": "Quel est le plus grand océan ?",
-    "choices": ["Atlantique", "Indien", "Arctique", "Pacifique"],
-    "answer": "Pacifique",
+    "question": "Qu'appelle-t-on Blaine ?",
+    "answer": "Finesse du ciment",
+    "type": "text"
+  },
+  {
+    "question": "Qu'est-ce qu'une fausse prise ?",
+"Choices":["Durcissement du béton","Formation de plâtre","fissuration du béton"
+],
+    "answer": "Formation de plâtre",
+    "type": "multiple"
+  },
+  {
+    "question": "Par quel test mesure-t-on la consistance du béton ?",
+    "answer": "L'affaissement du béton",
+    "type": "text"
+  },
+  {
+    "question": "En quoi consiste l'hydratation du ciment ?",
+    "choices": [
+      "La prise du ciment",
+      "L'ajout de l'eau au ciment",
+      "Une réaction chimique entre le clicher, l'eau et le sulfate de calcium",
+      "Le mélange eau et ciment"
+    ],
+    "answer": [
+      "Une réaction chimique entre le clicher, l'eau et le sulfate de calcium"
+    ],
+    "type": "multiple"
+  },
+  {
+    "question": "À quoi sert le broyage du clicher ?",
+    "choices": [
+      "Obtenir une résistance bien déterminée du ciment",
+      "Diminuer le volume du ciment obtenu par broyage",
+      "Augmenter la surface de contact avec l'eau",
+      "Réduire la taille des particules pour s'assurer que tout sera consommé"
+    ],
+    "answer": [
+      "Augmenter la surface de contact avec l'eau",
+      "Réduire la taille des particules pour s'assurer que tout sera consommé"
+    ],
+    "type": "multiple"
+  },
+  {
+    "question": "Que se passe-t-il si on n'ajoute pas de sulfate dans la composition du ciment ?",
+    "choices": [
+      "Prise immédiate du mélange en présence d'eau",
+      "Retarder la prise du mélange en présence d'eau",
+      "Apparition de fissures au séchage du mélange"
+    ],
+    "answer": ["Prise immédiate du mélange en présence d'eau"],
+    "type": "multiple"
+  },
+  {
+    "question": "Quelle est la signification de CEM II / B - 42.5 ?",
+    "choices": [
+      "Ciment composé portland avec 21 à 35 % d'ajout et une résistance maximale de 42.5 Mpa à 28 jours",
+      "Ciment composé portland avec ajout de 21 à 35 %",
+      "Ciment composé portland avec ajout de 6 à 20% et une classe de résistance de 42.5 N",
+      "Ciment composé portland avec 21 à 35 % d'ajout et une résistance minimale de 42.5 Mpa à 28 jours"
+    ],
+    "answer": [
+      "Ciment composé portland avec 21 à 35 % d'ajout et une résistance minimale de 42.5 Mpa à 28 jours"
+    ],
+    "type": "multiple"
+  },
+  {
+    "question": "Donnez une composition type d'un m3 de béton ?",
+    "choices": [
+      "1600 kg d'agrégats - 360 kg d'eau - 350 kg de ciment",
+      "1000 kg d'agrégats - 250 kg d'eau - 400 kg de ciment",
+      "1900 kg d'agrégats - 180 kg d'eau - 300 kg de ciment",
+      "2500 kg d'agrégats - 100 kg d'eau - 250 kg de ciment"
+    ],
+    "answer": ["1900 kg d'agrégats - 180 kg d'eau - 300 kg de ciment"],
+    "type": "multiple"
+  },
+  {
+    "question": "Qu'est-ce que le temps de prise du ciment ?",
+    "choices": [
+      "C'est la période pendant laquelle la pâte de ciment perd sa mobilité",
+      "C'est la période pendant laquelle la pâte de ciment atteint sa résistance minimale requise"
+    ],
+    "answer": [
+      "C'est la période pendant laquelle la pâte de ciment perd sa mobilité"
+    ],
+    "type": "multiple"
+  },
+  {
+    "question": "Qu'est-ce que la chaleur d'hydratation du ciment ?",
+    "choices": [
+      "La chaleur libérée lorsque le ciment et l'eau réagissent",
+      "la chaleur nécessaire pour obtenir le durcissement de la pâte de ciment"
+    ],
+    "answer": ["La chaleur libérée lorsque le ciment et l'eau réagissent"],
+    "type": "multiple"
+  },
+  {
+    "question": "Quelles sont les conditions d'applications les plus importantes ?",
+    "choices": [
+      "La résistance à 1j, 3j et 28j",
+      "Le temps de prise",
+      "La résistance à l'attaque chimique et physique",
+      "Le développement de la chaleur d'hydratation",
+      "la couleur"
+    ],
+    "answer": [
+      "La résistance à 1j, 3j et 28j",
+      "Le temps de prise",
+      "La résistance à l'attaque chimique et physique",
+      "Le développement de la chaleur d'hydratation",
+      "La couleur"
+    ],
+    "type": "multiple"
+  },
+  {
+    "question": "Quelles sont les exigences les plus courantes des utilisateurs finaux ?",
+    "choices": [
+      "Maniabilité",
+      "Adhésion",
+      "Régularité de la qualité",
+      "Fin de vie",
+      "Respect des délais de livraison",
+      "Le prix le plus bas",
+      "La résistance la plus élevée"
+    ],
+    "answer": [
+      "Maniabilité",
+      "Adhésion",
+      "Régularité de la qualité",
+      "Fin de vie",
+      "Respect des délais de livraison"
+    ],
+    "type": "multiple"
+  },
+  {
+    "question": "Définition de mortier ?",
+    "choices": [
+      "Mélange de ciment, de chaux ou de gypse, de sable et de l'eau, qui durcit en un solide lisse qui sert à enduire les murs et les plafonds",
+      "Mélange constitué de matériaux cimetières, agrégats fins, d'eau et avec ou sans adjuvants"
+    ],
+    "answer": [
+      "Mélange constitué de matériaux cimetières, agrégats fins, d'eau et avec ou sans adjuvants"
+    ],
+    "type": "multiple"
+  },
+  {
+    "question": "Qu'est-ce qu'une réaction hydraulique ?",
+    "choices": [
+      "Réaction activée par un catalyseur",
+      "Réaction en présence d'eau"
+    ],
+    "answer": ["Réaction en présence d'eau"],
+    "type": "multiple"
+  },
+  {
+    "question": "Quel est le rôle de l'eau dans l'état du béton frais ?",
+    "choices": [
+      "Elle fournit la mobilité à la masse de béton frais",
+      "Elle réagit avec le liant permettant ainsi au béton de faire prise et durcir"
+    ],
+    "answer": ["Elle fournit la mobilité à la masse de béton frais"],
+    "type": "multiple"
+  },
+  {
+    "question": "Quel est le rôle des granulats dans le béton ?",
+    "choices": [
+      "Ils fournissent un remplissage relativement bon marché",
+      "Ils augmentent la résistance du béton"
+    ],
+    "answer": ["Ils fournissent un remplissage relativement bon marché"],
+    "type": "multiple"
+  },
+  {
+    "question": "Quel sont les facteurs qui influencent la résistance du béton ?",
+    "choices": [
+      "Le rapport Eau/Ciment",
+      "La porosité",
+      "La quantité de ciment",
+      "Le type de ciment",
+      "Le type d'agrégats",
+      "L'âge du béton",
+      "Les conditions de cure"
+    ],
+    "answer": [
+      "Le rapport Eau/Ciment",
+      "La porosité",
+      "La quantité de ciment",
+      "Le type de ciment",
+      "Le type d'agrégats",
+      "L'âge du béton",
+      "Les conditions de cure"
+    ],
     "type": "multiple"
   }
 ]

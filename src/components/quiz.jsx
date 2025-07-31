@@ -1,16 +1,27 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import questionsData from "../data/questions.json";
 import { jaccardSimilarity } from "../utils/compare";
 
+function normalize(str) {
+  return str
+    .toLowerCase()
+    .normalize("NFD") // décompose les caractères accentués
+    .replace(/[\u0300-\u036f]/g, "") // supprime les accents
+    .trim(); // supprime les espaces au début/fin
+}
+
 function isAnswerCloseEnough(input, correct, threshold = 0.6) {
-  return jaccardSimilarity(input, correct) >= threshold;
+  const cleanInput = normalize(input);
+  const cleanCorrect = normalize(correct);
+  return jaccardSimilarity(cleanInput, cleanCorrect) >= threshold;
 }
 
 export default function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(null);
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = useState([]);
   const [feedback, setFeedback] = useState(null);
   const [incorrectQueue, setIncorrectQueue] = useState([]);
   const [completed, setCompleted] = useState(false);
@@ -52,10 +63,22 @@ export default function Quiz() {
     e.preventDefault();
     if (!current) return;
 
-    const isCorrect =
-      current.type === "multiple"
-        ? answer === current.answer
-        : isAnswerCloseEnough(answer, current.answer);
+    const correctAnswer = current.answer;
+    let isCorrect = false;
+
+    if (current.type === "multiple") {
+      // On normalise et trie les deux tableaux pour comparaison
+      const normalizedUserAnswers = answer.map(normalize).sort();
+      const normalizedCorrectAnswers = correctAnswer.map(normalize).sort();
+
+      isCorrect =
+        normalizedUserAnswers.length === normalizedCorrectAnswers.length &&
+        normalizedUserAnswers.every(
+          (val, index) => val === normalizedCorrectAnswers[index]
+        );
+    } else {
+      isCorrect = isAnswerCloseEnough(answer, correctAnswer);
+    }
 
     let newIncorrectQueue = [...incorrectQueue];
     let newQuestions = [...questions];
@@ -76,7 +99,11 @@ export default function Quiz() {
     } else {
       setFeedback({
         type: "incorrect",
-        text: `❌ Mauvaise réponse. La bonne réponse était : ${current.answer}`,
+        text: `❌ Mauvaise réponse. La bonne réponse était : ${
+          Array.isArray(correctAnswer)
+            ? correctAnswer.join(", ")
+            : correctAnswer
+        }`,
       });
 
       if (!newIncorrectQueue.some((q) => q.question === current.question)) {
@@ -158,25 +185,35 @@ export default function Quiz() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {current?.type === "multiple" ? (
             <div className="space-y-2">
-              {current?.choices.map((choice) => (
-                <label
-                  key={choice}
-                  className={`block border p-3 rounded-lg cursor-pointer ${
-                    answer === choice
-                      ? "bg-blue-100 border-blue-500"
-                      : "border-gray-300"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    value={choice}
-                    checked={answer === choice}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    className="hidden"
-                  />
-                  {choice}
-                </label>
-              ))}
+              {current?.choices.map((choice) => {
+                const isChecked = answer.includes(choice);
+
+                return (
+                  <label
+                    key={choice}
+                    className={`block border p-3 rounded-lg cursor-pointer ${
+                      isChecked
+                        ? "bg-blue-100 border-blue-500"
+                        : "border-gray-300"
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      value={choice}
+                      checked={isChecked}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setAnswer((prev) => [...prev, choice]);
+                        } else {
+                          setAnswer((prev) => prev.filter((c) => c !== choice));
+                        }
+                      }}
+                      className="hidden"
+                    />
+                    {choice}
+                  </label>
+                );
+              })}
             </div>
           ) : (
             <textarea
